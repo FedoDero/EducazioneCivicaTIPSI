@@ -8,7 +8,8 @@ namespace progetto_tecnologie_FedoDero
 {
     internal class Class1
     {
-        string alpha = "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz";
+        private string alpha = "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz";
+        private int contatore = 0;
 
         public Class1()
         {
@@ -17,7 +18,8 @@ namespace progetto_tecnologie_FedoDero
 
         private int Trovanumero(char a)
         {
-            foreach (char i in alpha) {
+            foreach (char i in alpha)
+            {
                 if (alpha.Contains(a))
                 {
                     return alpha.IndexOf(i) + 1;
@@ -25,14 +27,16 @@ namespace progetto_tecnologie_FedoDero
             }
             return 0;
         }
-        
+
         public void Cripto1(string mess, int n)
         {
-            foreach (var i in mess) {
-                foreach (var j in alpha) {
+            foreach (var i in mess)
+            {
+                foreach (var j in alpha)
+                {
                     if (mess[i] == alpha[j])
                     {
-                        mess.Replace(mess[i], alpha[j+n]);
+                        mess.Replace(mess[i], alpha[j + n]);
                     }
                 }
             }
@@ -68,6 +72,35 @@ namespace progetto_tecnologie_FedoDero
             }
 
             return sum * n;
+        }
+
+        public int OperaStrana(string mess, int n)
+        {
+            int molti = 0;
+
+            foreach (var i in mess)
+            {
+                foreach (var j in alpha)
+                {
+                    if (mess[i] == alpha[j])
+                    {
+                        molti *= Trovanumero(alpha[i]);
+                    }
+                }
+            }
+
+            return molti / n;
+        }
+
+        public int PariODispari(string mess, int n)
+        {
+            if (n % 2 == 0) { return MoltiLetterale(mess, n); contatore++; }
+            else { return OperaStrana(mess, n); contatore++; }
+        }
+
+        public int Combofinale(string mess)
+        {
+            return PariODispari(mess, contatore);
         }
     }
 }
