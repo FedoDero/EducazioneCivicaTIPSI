@@ -14,8 +14,19 @@ namespace progetto_tecnologie_FedoDero
         {
 
         }
+
+        private int Trovanumero(char a)
+        {
+            foreach (char i in alpha) {
+                if (alpha.Contains(a))
+                {
+                    return alpha.IndexOf(i) + 1;
+                }
+            }
+            return 0;
+        }
         
-        public void cripto1(string mess, int n)
+        public void Cripto1(string mess, int n)
         {
             foreach (var i in mess) {
                 foreach (var j in alpha) {
@@ -25,6 +36,38 @@ namespace progetto_tecnologie_FedoDero
                     }
                 }
             }
+        }
+
+        public void Cripto2(string mess, int n)
+        {
+            foreach (var i in mess)
+            {
+                foreach (var j in alpha)
+                {
+                    if (mess[i] == alpha[j])
+                    {
+                        mess.Replace(mess[i], alpha[j - n]);
+                    }
+                }
+            }
+        }
+
+        public int MoltiLetterale(string mess, int n)
+        {
+            int sum = 0;
+
+            foreach (var i in mess)
+            {
+                foreach (var j in alpha)
+                {
+                    if (mess[i] == alpha[j])
+                    {
+                        sum += Trovanumero(alpha[i]);
+                    }
+                }
+            }
+
+            return sum * n;
         }
     }
 }
